@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskFlow</title>
+    <link rel="icon" type="image/png" href="task_flow_logo.png">
     <style>
         * {
             margin: 0;
@@ -15,25 +16,32 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0e27;
             min-height: 100vh;
+            padding: 15px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding-top: 20px;
         }
 
         .container {
+            width: 70%;
+            max-width: 900px;
+            min-width: 400px;
             background: #1a1d2e;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            width: 100%;
-            max-width: 600px;
             border: 1px solid #2a2d3e;
+            display: flex;
+            flex-direction: column;
+            height: 85vh; 
+            max-height: 750px;
         }
 
         .header {
             background: #16213e;
             padding: 25px 30px;
             border-bottom: 1px solid #2a2d3e;
+            flex-shrink: 0;
         }
 
         .header h1 {
@@ -71,6 +79,8 @@
 
         .input-section {
             padding: 25px 30px;
+            flex-shrink: 0;
+            border-bottom: 1px solid #2a2d3e;
         }
 
         .input-wrapper {
@@ -109,25 +119,24 @@
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .add-btn:hover {
             background: #4a8bc2;
         }
 
-        .add-btn:disabled {
-            background: #3a4d6e;
-            cursor: not-allowed;
-        }
-
         .filter-section {
-            padding: 0 30px 20px 30px;
+            padding: 20px 30px;
             display: flex;
             gap: 10px;
+            flex-shrink: 0;
+            border-bottom: 1px solid #2a2d3e;
         }
 
         .filter-btn {
-            padding: 8px 16px;
+            flex: 1;
+            padding: 10px 12px;
             border: 1px solid #2a2d3e;
             background: transparent;
             color: #8b92a9;
@@ -149,21 +158,30 @@
             border-color: #5b9bd5;
         }
 
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0; 
+        }
+
         .tasks-section {
-            padding: 0 30px 25px 30px;
-            max-height: 450px;
+            flex: 1;
+            padding: 25px 30px;
             overflow-y: auto;
+            max-height: 350px;
         }
 
         .task-item {
             display: flex;
             align-items: center;
-            padding: 14px 16px;
+            padding: 16px 20px;
             background: #0a0e27;
             border: 1px solid #2a2d3e;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             transition: all 0.2s;
+            min-height: 52px; 
         }
 
         .task-item:hover {
@@ -181,12 +199,12 @@
         }
 
         .checkbox {
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
             border: 2px solid #5b9bd5;
             border-radius: 4px;
-            margin-right: 14px;
+            margin-right: 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -206,7 +224,7 @@
         .checkbox.checked::after {
             content: '✓';
             color: #ffffff;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
         }
 
@@ -214,6 +232,7 @@
             flex: 1;
             font-size: 15px;
             color: #e5e7eb;
+            line-height: 1.4;
         }
 
         .delete-btn {
@@ -226,6 +245,7 @@
             font-size: 13px;
             transition: all 0.2s;
             opacity: 0;
+            white-space: nowrap;
         }
 
         .task-item:hover .delete-btn {
@@ -239,25 +259,27 @@
 
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 40px;
             color: #6b7280;
         }
 
         .empty-state-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
+            font-size: 48px;
+            margin-bottom: 16px;
             opacity: 0.5;
         }
 
         .file-controls {
-            padding: 0 30px 25px 30px;
+            padding: 20px 30px 25px;
             display: flex;
             gap: 10px;
+            flex-shrink: 0;
+            border-top: 1px solid #2a2d3e;
         }
 
         .file-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             background: transparent;
             color: #8b92a9;
             border: 1px solid #2a2d3e;
@@ -272,19 +294,95 @@
             color: #5b9bd5;
         }
 
-        .file-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
         .status {
-            padding: 10px 30px;
+            padding: 12px 30px;
             font-size: 13px;
             color: #5b9bd5;
             text-align: center;
+            flex-shrink: 0;
         }
 
-        /* Scrollbar styling */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-top: 15px;
+            }
+            
+            .container {
+                width: 100% !important;
+                min-width: unset;
+                max-width: none;
+                height: 95vh;
+                border-radius: 8px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .stats {
+                gap: 15px;
+                font-size: 12px;
+            }
+            
+            .stat-number {
+                font-size: 18px;
+            }
+            
+            .input-wrapper {
+                flex-direction: column;
+            }
+            
+            .add-btn {
+                width: 100%;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+            
+            .file-controls {
+                flex-direction: column;
+            }
+            
+            .file-btn {
+                width: 100%;
+            }
+            
+            .tasks-section {
+                padding: 20px 20px;
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 20px 20px;
+            }
+            
+            .input-section {
+                padding: 20px;
+            }
+            
+            .tasks-section {
+                padding: 15px 15px;
+                max-height: 280px;
+            }
+            
+            .file-controls {
+                padding: 15px 15px 20px;
+            }
+        }
+
         .tasks-section::-webkit-scrollbar {
             width: 6px;
         }
@@ -331,20 +429,22 @@
                     placeholder="Add a new task..."
                     autocomplete="off"
                 >
-                <button class="add-btn" id="addBtn" onclick="addTask()">Add</button>
+                <button class="add-btn" onclick="addTask()">Add</button>
             </div>
         </div>
 
         <div class="filter-section">
-            <button class="filter-btn active" onclick="filterTasks('all')">All</button>
-            <button class="filter-btn" onclick="filterTasks('active')">Active</button>
-            <button class="filter-btn" onclick="filterTasks('completed')">Completed</button>
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
         </div>
 
-        <div class="tasks-section" id="tasksContainer">
-            <div class="empty-state">
-                <div class="empty-state-icon">📋</div>
-                <div>Load tasks.json to get started</div>
+        <div class="main-content">
+            <div class="tasks-section" id="tasksContainer">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <div>Load tasks.json to get started</div>
+                </div>
             </div>
         </div>
 
@@ -361,7 +461,6 @@
         let tasks = [];
         let currentFilter = 'all';
 
-        // File handling functions
         function showStatus(msg, isError = false) {
             const status = document.getElementById('statusMsg');
             status.textContent = msg;
@@ -426,18 +525,21 @@
             showStatus('File downloaded');
         }
 
-        // Task management functions (same as before but async)
-        window.onload = function() {
-            updateStats();
-        };
-
-        document.getElementById('taskInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addTask();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterTasks(this.dataset.filter);
+                });
+            });
+            
+            document.getElementById('taskInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
         });
 
-        async function addTask() {
+        function addTask() {
             const input = document.getElementById('taskInput');
             const taskText = input.value.trim();
 
@@ -456,9 +558,9 @@
             tasks.unshift(task);
             input.value = '';
             input.focus();
+            
             renderTasks();
             updateStats();
-            document.getElementById('addBtn').disabled = true;
             showStatus('Save file to persist this task');
         }
 
@@ -483,7 +585,7 @@
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
             renderTasks();
         }
 
