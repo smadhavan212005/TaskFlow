@@ -8,31 +8,6 @@ A clean, minimalist task management web application with local file storage capa
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-## 📑 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Usage Guide](#usage-guide)
-- [File Structure](#file-structure)
-- [Data Storage](#data-storage)
-- [Technical Specifications](#technical-specifications)
-- [Browser Compatibility](#browser-compatibility)
-- [Responsive Design](#responsive-design)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
-- [Customization](#customization)
-- [Troubleshooting](#troubleshooting)
-- [FAQ](#faq)
-- [Security & Privacy](#security--privacy)
-- [Performance](#performance)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
-- [Credits](#credits)
-- [Contact](#contact)
-
 ## 🎯 Overview
 
 TaskFlow is a modern, privacy-focused task management application that stores all your data locally on your computer. Unlike cloud-based solutions, TaskFlow gives you complete control over your tasks with a beautiful, distraction-free interface.
