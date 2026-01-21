@@ -107,5 +107,3 @@ Evening:
 10. Close browser
 
 
-
-### Desktop Interface
